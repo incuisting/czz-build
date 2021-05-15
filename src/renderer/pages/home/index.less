@@ -1,24 +1,46 @@
 @import '~theme/index';
 
+body {
+  background: @background-color-base;
+}
 .container {
+  padding: 0 8px;
+  padding-bottom: 32px;
+  background: @background-color-base;
+  @apply flex flex-col;
+}
+
+.buttonGroup {
+  @apply sticky top-0 z-50 flex justify-between;
+  padding: 16px 0;
   background: @background-color-base;
 
-  @apply flex-center-children h-screen;
+  .deviceManage,
+  .operator {
+    @apply: flex;
+    & > * {
+      @apply ml-4;
+    }
+  }
 }
-
 .content {
-  margin-bottom: 8px;
+  @apply flex-1;
 }
+.cardHeader {
+  @apply flex;
+  .cardTitle {
+    width: 100%;
+    @apply ml-3 flex justify-between items-center;
+    .status {
+      @apply flex;
 
-.link {
-  color: @primary-color;
-  @apply ml-2;
+      .edit {
+        @apply cursor-pointer ml-3;
+      }
+    }
+  }
 }
-
-.img {
-  width: 500px;
-  @apply mb-8;
-}
-.card {
-  @apply mt-4 w-80;
+.operatorButton {
+  width: 50%;
+  @apply text-center cursor-pointer;
 }
