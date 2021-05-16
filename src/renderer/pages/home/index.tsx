@@ -2,29 +2,21 @@ import type { FC } from 'react';
 import { useState } from 'react';
 import { Button, Checkbox, Row, Card, Col } from 'antd';
 import { SettingOutlined } from '@ant-design/icons';
-
 import { useSelections, useInterval, useMount } from 'ahooks';
-
 import { useDatabase, usePillarControl, useSetting } from '@/hooks';
 import BaseModal from './BaseModal';
-
+import ControlCard from './ControlCard';
 import styles from './index.less';
 
 const Home: FC = () => {
   const { pillar } = useDatabase();
-  const { checkLic  } = useSetting();
+  const { checkLic } = useSetting();
   const { up, down, updateAllStatus } = usePillarControl<number>();
   const [czzList, setCzz] = useState<Models.Pillar[]>([]);
   const [pillarDetail, setPillarDetail] = useState<Models.Pillar | null>(null);
   const [selections, setSelections] = useState<number[]>([]);
-  const {
-    selected,
-    allSelected,
-    isSelected,
-    toggle,
-    toggleAll,
-    unSelectAll,
-  } = useSelections(selections, []);
+  const { selected, allSelected, isSelected, toggle, toggleAll, unSelectAll } =
+    useSelections(selections, []);
   const [modalVisible, setModalVisible] = useState(false);
   async function queryDB() {
     const devices = await pillar.finAll();
@@ -119,61 +111,81 @@ const Home: FC = () => {
         </div>
       </div>
       <div className={styles.content}>
-        <Row gutter={[8, 8]}>
-          {czzList.map((el) => {
-            return (
-              <Col span={8} key={el.id}>
-                <Card
-                  title={
-                    <div className={styles.cardHeader}>
-                      <Checkbox
-                        checked={isSelected(el.id)}
-                        onClick={() => toggle(el.id)}
-                      ></Checkbox>
-                      <div className={styles.cardTitle}>
-                        <div>{el.name}</div>
-                        <div className={styles.status}>
-                          {computedStatusStr(el.status)}
-                          <div
-                            className={styles.edit}
-                            onClick={async () => {
-                              const item = await pillar.findByIds([el.id]);
-                              setPillarDetail(item[0]);
-                              setModalVisible(true);
-                            }}
-                          >
-                            <SettingOutlined />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  }
-                  bordered={false}
-                >
-                  <Card.Grid className={styles.operatorButton}>
-                    <div
-                      onClick={() => {
-                        up([el.id]);
-                      }}
-                    >
-                      升
-                    </div>
-                  </Card.Grid>
+        {czzList.map((el) => {
+          
+          return (
+            <ControlCard
+              key={el.id}
+              name={el.name}
+              handleSetting={async () => {
+                const item = await pillar.findByIds([el.id]);
+                setPillarDetail(item[0]);
+                setModalVisible(true);
+              }}
+              handleSwitch={(value: boolean) => {
+                if (value) {
+                  up([el.id]);
+                } else {
+                  down([el.id]);
+                }
+              }}
+              status={el.status}
+              selected={isSelected(el.id)}
+              handleSelected={() => toggle(el.id)}
+            ></ControlCard>
+          );
+          // return (
+          //   <Col span={8} key={el.id}>
+          //     <Card
+          //       title={
+          //         <div className={styles.cardHeader}>
+          //           <Checkbox
+          //             checked={isSelected(el.id)}
+          //             onClick={() => toggle(el.id)}
+          //           ></Checkbox>
+          //           <div className={styles.cardTitle}>
+          //             <div>{el.name}</div>
+          //             <div className={styles.status}>
+          //               {computedStatusStr(el.status)}
+          //               <div
+          //                 className={styles.edit}
+          //                 onClick={async () => {
+          //                   const item = await pillar.findByIds([el.id]);
+          //                   setPillarDetail(item[0]);
+          //                   setModalVisible(true);
+          //                 }}
+          //               >
+          //                 <SettingOutlined />
+          //               </div>
+          //             </div>
+          //           </div>
+          //         </div>
+          //       }
+          //       bordered={false}
+          //     >
+          //       <Card.Grid className={styles.operatorButton}>
+          //         <div
+          //           onClick={() => {
+          //             up([el.id]);
+          //           }}
+          //         >
+          //           升
+          //         </div>
+          //       </Card.Grid>
 
-                  <Card.Grid className={styles.operatorButton}>
-                    <div
-                      onClick={() => {
-                        down([el.id]);
-                      }}
-                    >
-                      降
-                    </div>
-                  </Card.Grid>
-                </Card>
-              </Col>
-            );
-          })}
-        </Row>
+          //       <Card.Grid className={styles.operatorButton}>
+          //         <div
+          //           onClick={() => {
+          //             down([el.id]);
+          //           }}
+          //         >
+          //           降
+          //         </div>
+          //       </Card.Grid>
+          //     </Card>
+          //   </Col>
+          // );
+        })}
       </div>
       <BaseModal
         title={pillarDetail ? '编辑' : '添加'}

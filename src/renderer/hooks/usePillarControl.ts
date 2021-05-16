@@ -19,6 +19,8 @@ export function usePillarControl<T>() {
             host: item.ip,
             port: item.port,
           });
+
+          pillar.update(item.id, { status: 1 });
         } catch (e) {
           console.error(e);
           pillar.update(item.id, { status: 0 });
@@ -35,6 +37,7 @@ export function usePillarControl<T>() {
             host: item.ip,
             port: item.port,
           });
+          pillar.update(item.id, { status: 2 });
         } catch (e) {
           console.error(e);
           pillar.update(item.id, { status: 0 });
