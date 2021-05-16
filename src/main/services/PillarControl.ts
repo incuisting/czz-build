@@ -30,7 +30,6 @@ export class PillarControlService {
       }
       return 2;
     } catch (e) {
-      console.error(e);
       return 0;
     }
   }
