@@ -102,7 +102,7 @@ export class SettingService {
     const info = MAC + hostname + osType + platform + arch + release;
     const appId = CryptoJS.SHA1(info)
       .toString(CryptoJS.enc.Hex)
-      .substring(0, 7);
+      .substring(0, 8);
     return appId;
   }
 }

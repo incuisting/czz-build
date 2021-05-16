@@ -11,6 +11,7 @@ export interface WindowOpts {
   width?: number;
   height?: number;
   devTools?: boolean;
+  resizable?: boolean;
   /**
    * 允许 renderer 进行使用 remote 模块
    */
@@ -23,11 +24,12 @@ export interface WindowOpts {
  */
 
 export const createWindow = (opts: WindowOpts) => {
-  const { name, title, width, height, devTools, remote } = opts;
+  const { name, title, width, height, devTools, remote, resizable } = opts;
   const windows = new BrowserWindow({
     width,
     height,
     title,
+    resizable,
     webPreferences: {
       nodeIntegration: true,
       enableRemoteModule: remote,

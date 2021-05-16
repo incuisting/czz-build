@@ -6,7 +6,13 @@ export class HomeWindow {
   private window: Main.BrowserWindow;
 
   constructor() {
-    this.window = createWindow({ name: 'home', remote: true });
+    this.window = createWindow({
+      name: 'home',
+      remote: true,
+      width: 500,
+      height: 600,
+      resizable: false,
+    });
   }
 
   show() {
