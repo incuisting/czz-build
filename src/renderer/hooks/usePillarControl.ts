@@ -15,12 +15,11 @@ export function usePillarControl<T>() {
     pillars.forEach((item: Models.Pillar) => {
       if (item.status !== UP) {
         try {
+          pillar.update(item.id, { status: 1 });
           pillarControl.up({
             host: item.ip,
             port: item.port,
           });
-
-          pillar.update(item.id, { status: 1 });
         } catch (e) {
           console.error(e);
           pillar.update(item.id, { status: 0 });
@@ -33,11 +32,11 @@ export function usePillarControl<T>() {
     pillars.forEach((item: Models.Pillar) => {
       if (item.status !== DOWN) {
         try {
+          pillar.update(item.id, { status: 2 });
           pillarControl.down({
             host: item.ip,
             port: item.port,
           });
-          pillar.update(item.id, { status: 2 });
         } catch (e) {
           console.error(e);
           pillar.update(item.id, { status: 0 });

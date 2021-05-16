@@ -13,11 +13,16 @@ body {
   padding: 16px 0;
   background: @background-color-base;
 
-  .deviceManage,
   .operator {
     @apply: flex;
     & > * {
       @apply ml-4;
+    }
+  }
+  .deviceManage {
+    @apply: flex;
+    & > * {
+      @apply mr-4;
     }
   }
 }
@@ -27,20 +32,6 @@ body {
   flex-wrap: wrap;
   justify-content: space-between;
   padding: 8px;
-}
-.cardHeader {
-  @apply flex;
-  .cardTitle {
-    width: 100%;
-    @apply ml-3 flex justify-between items-center;
-    .status {
-      @apply flex;
-
-      .edit {
-        @apply cursor-pointer ml-3;
-      }
-    }
-  }
 }
 .operatorButton {
   width: 50%;
