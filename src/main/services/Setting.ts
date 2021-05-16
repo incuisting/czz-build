@@ -100,7 +100,9 @@ export class SettingService {
     const release = os.release();
     const MAC = await this.getMAC();
     const info = MAC + hostname + osType + platform + arch + release;
-    const appId = CryptoJS.SHA1(info).toString(CryptoJS.enc.Hex);
+    const appId = CryptoJS.SHA1(info)
+      .toString(CryptoJS.enc.Hex)
+      .substring(0, 7);
     return appId;
   }
 }
