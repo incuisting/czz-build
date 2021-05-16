@@ -32,6 +32,8 @@ const BaseModal: FC<Props> = (props) => {
       onCancel={handleCancel}
       okText={'提交'}
       cancelText={'取消'}
+      width={'350px'}
+
     >
       <Form form={form} onFinish={handleOk}>
         <Form.Item

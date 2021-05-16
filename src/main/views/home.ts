@@ -10,7 +10,7 @@ export class HomeWindow {
       name: 'home',
       remote: true,
       width: 500,
-      height: 600,
+      height: 650,
       resizable: false,
     });
   }

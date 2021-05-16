@@ -1,7 +1,6 @@
 import type { FC } from 'react';
 import { useState } from 'react';
-import { Button, Checkbox, Row, Card, Col } from 'antd';
-import { SettingOutlined } from '@ant-design/icons';
+import { Button} from 'antd';
 import { useSelections, useInterval, useMount } from 'ahooks';
 import { useDatabase, usePillarControl, useSetting } from '@/hooks';
 import BaseModal from './BaseModal';
@@ -33,10 +32,6 @@ const Home: FC = () => {
     queryDB();
   }, 1000);
 
-  const computedStatusStr = (status: 0 | 1 | 2) => {
-    const dic = { 0: '离线', 1: '升起', 2: '降下' };
-    return dic[status];
-  };
   const addDevice = (values: { name: string; ip: string; port: string }) => {
     const { name, ip, port } = values;
     pillar.insert(ip, name, port);
@@ -112,7 +107,7 @@ const Home: FC = () => {
       </div>
       <div className={styles.content}>
         {czzList.map((el) => {
-          
+
           return (
             <ControlCard
               key={el.id}
@@ -134,57 +129,6 @@ const Home: FC = () => {
               handleSelected={() => toggle(el.id)}
             ></ControlCard>
           );
-          // return (
-          //   <Col span={8} key={el.id}>
-          //     <Card
-          //       title={
-          //         <div className={styles.cardHeader}>
-          //           <Checkbox
-          //             checked={isSelected(el.id)}
-          //             onClick={() => toggle(el.id)}
-          //           ></Checkbox>
-          //           <div className={styles.cardTitle}>
-          //             <div>{el.name}</div>
-          //             <div className={styles.status}>
-          //               {computedStatusStr(el.status)}
-          //               <div
-          //                 className={styles.edit}
-          //                 onClick={async () => {
-          //                   const item = await pillar.findByIds([el.id]);
-          //                   setPillarDetail(item[0]);
-          //                   setModalVisible(true);
-          //                 }}
-          //               >
-          //                 <SettingOutlined />
-          //               </div>
-          //             </div>
-          //           </div>
-          //         </div>
-          //       }
-          //       bordered={false}
-          //     >
-          //       <Card.Grid className={styles.operatorButton}>
-          //         <div
-          //           onClick={() => {
-          //             up([el.id]);
-          //           }}
-          //         >
-          //           升
-          //         </div>
-          //       </Card.Grid>
-
-          //       <Card.Grid className={styles.operatorButton}>
-          //         <div
-          //           onClick={() => {
-          //             down([el.id]);
-          //           }}
-          //         >
-          //           降
-          //         </div>
-          //       </Card.Grid>
-          //     </Card>
-          //   </Col>
-          // );
         })}
       </div>
       <BaseModal

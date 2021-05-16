@@ -28,6 +28,10 @@ export function useSetting() {
       routeTo('/auth');
     }
     if (currentAppId !== appId) {
+      // 清除原先缓存的appid
+      setting.setActive({
+        appId:currentAppId,
+      });
       routeTo('/auth');
     }
   };
