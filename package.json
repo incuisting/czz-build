@@ -1,9 +1,9 @@
 {
-  "name": "umi-electron-template",
-  "version": "1.9.1",
-  "author": "Arvin Xu<arvinx@foxmail.com>",
+  "name": "czz",
+  "version": "1.0.0",
+  "author": "Xu<xuyanting9634@gmail.com>",
   "main": "main.js",
-  "description": "umi electron template",
+  "description": "czz",
   "private": true,
   "repository": "https://github.com/arvinxx/umi-electron-template.git",
   "scripts": {

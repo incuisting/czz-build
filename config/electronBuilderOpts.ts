@@ -4,9 +4,9 @@ export default {
   /**
    *  app 基础信息
    */
-  appId: 'com.arvinxx.umi-electron-template',
-  productName: 'Umi Electron Template',
-  copyright: 'Copyright © 2021 Arvin Xu | All Right Reserved.',
+  appId: 'com.Non.czz',
+  productName: 'czz',
+  copyright: 'Copyright © 2021 Non | All Right Reserved.',
 
   /**
    * 配置 notarize dmg
