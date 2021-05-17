@@ -12,6 +12,7 @@ export class HomeWindow {
       width: 500,
       height: 650,
       resizable: false,
+      frame: false,
     });
   }
 
